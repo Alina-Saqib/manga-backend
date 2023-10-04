@@ -13,7 +13,7 @@ router.get('/', GetAllProvider);
 router.get('/:id', GetSingleProvider);
 
 // Update a game provider by ID
-router.put('/:id', UpdateProvider);
+router.put('/:id',upload.single('image'), UpdateProvider);
 
 // Delete a game provider by ID
 router.delete('/:id',DeleteProvider );

@@ -11,6 +11,7 @@ const gameSchema = new mongoose.Schema({
       end: String,   
     },
   ],
+  gameCodeIntegers: [{ type: Number }], 
   gameCode: [{ type: String }],
   percentage: { type: Number, min: 0, max: 100 },
   position: Number,
@@ -20,22 +21,22 @@ const gameSchema = new mongoose.Schema({
   },
 });
 
-// Middleware to assign the position automatically before saving a new game
+
 gameSchema.pre('save', async function (this: any ,next: NextFunction) {
-  // Check if this is a new game (not an update)
+ 
   if (!this.isNew) {
     return next();
   }
 
   try {
-    // Find the maximum position value for the current provider
+    
     const maxPosition = await this.constructor.findOne({
       provider: this.provider,
     })
-      .sort({ position: -1 }) // Sort in descending order to find the maximum
+      .sort({ position: -1 }) 
       .select('position');
 
-    // Assign the next position value
+   
     this.position = maxPosition ? maxPosition.position + 1 : 1;
 
     next();

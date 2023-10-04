@@ -8,7 +8,10 @@ export const connectDB = async (mongoUrl: string) => {
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
     }
+    
 };
+
+
 
 
 

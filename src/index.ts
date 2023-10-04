@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mysql from 'mysql';
-import http from 'http';
+import https from 'http';
 import bodyParser from 'body-parser';
 import { connectDB } from './config/connectDB';
 import provider from './routes/providerRoutes';
@@ -20,7 +20,7 @@ const MONGO_URL = process.env.MONGO_URL!;
 
 app.use(bodyParser.json({ limit: "10mb" }));
 
-const server = http.createServer(app);
+const server = https.createServer(app);
 
 
 
@@ -29,6 +29,8 @@ server.listen(PORT, () => {
 });
 
 connectDB(MONGO_URL);
+
+
 
 app.get('/',(req,res)=>{
     res.send('Api is running');

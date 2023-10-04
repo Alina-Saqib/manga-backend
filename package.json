@@ -30,6 +30,7 @@
     "express": "^4.18.2",
     "express-recaptcha": "^5.1.0",
     "express-validator": "^7.0.1",
+    "ftp-ts": "^1.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.0",
     "multer": "^1.4.5-lts.1",
