@@ -17,7 +17,7 @@ export const RegisterController = async (req: Request, res: Response) => {
   try {
     
     const { name, email, password, display_name } = req.body;
-      // Check if the email already exists
+     
       const existingUser = await User.findOne({ where: { email , display_name} });
 
       if (existingUser) {

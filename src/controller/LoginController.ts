@@ -1,4 +1,4 @@
-import express, { Request, Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt, { Secret } from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
@@ -13,7 +13,7 @@ export const LoginController = async (req: Request, res: Response) => {
   }
 
   try {
-    // Handle user login here (e.g., verify credentials)
+   
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
 
@@ -28,12 +28,11 @@ export const LoginController = async (req: Request, res: Response) => {
       return res.status(402).json({ message: 'Incorrect password' });
     }
 
-    // Create and sign a JWT token
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as Secret, {
       expiresIn: '7d', 
     });
 
-    // Respond with success message and token
+  
     res.status(200).json({ message: 'Login successful', user, token });
   } catch (error: any) {
     console.error(error);

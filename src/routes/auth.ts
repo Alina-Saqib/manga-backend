@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import dotenv from 'dotenv';
 import RegisterController from '../controller/RegisterController';
 import LoginController from '../controller/LoginController';
+import { deleteUser, updateUser } from '../controller/UserController';
 
 
 
@@ -32,6 +33,11 @@ router.post(
     LoginController
 
 );
+
+
+router.put('/:id', updateUser)
+router.delete('/:id', deleteUser)
+
   
 
 

@@ -11,7 +11,7 @@ class Manga extends Model {
   public trending?: boolean;
   public rating?: number;
   public tags?: string[];
-  public chapters?: Chapter[]; 
+  public chapters?: Chapter[];
 }
 
 export interface Chapter {
@@ -54,10 +54,10 @@ Manga.init(
       type: DataTypes.FLOAT,
     },
     tags: {
-      type: DataTypes.ARRAY(DataTypes.STRING), // Use ARRAY for tags
+      type: DataTypes.JSON,
     },
     chapters: {
-      type: DataTypes.JSONB, // Use JSONB to store an array of chapter objects
+      type: DataTypes.JSON, 
     },
   },
   {
