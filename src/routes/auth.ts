@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import RegisterController from '../controller/RegisterController';
 import LoginController from '../controller/LoginController';
 import { deleteUser, updateUser } from '../controller/UserController';
+import { ForgetController } from '../controller/ForgetController';
+import ResetPasswordController from '../controller/ResetPasswordController';
 
 
 
@@ -37,6 +39,10 @@ router.post(
 
 router.put('/:id', updateUser)
 router.delete('/:id', deleteUser)
+
+router.post('/forget-password' , ForgetController)
+
+router.post('/reset-password/:token' , ResetPasswordController)
 
   
 

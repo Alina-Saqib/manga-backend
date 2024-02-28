@@ -9,6 +9,9 @@ class User extends Model {
   public email!: string;
   public password!: string;
   public display_name!: string;
+  public resetPasswordToken!: string;
+  public resetPasswordExpires!: Date;
+
 }
 
 User.init(
@@ -30,6 +33,13 @@ User.init(
       allowNull: false,
       unique: true,
     },
+    resetPasswordToken:{
+      type: DataTypes.STRING,
+      unique: true,
+    },
+    resetPasswordExpires:{
+      type: DataTypes.DATE
+    }
   },
   {
     sequelize,

@@ -15,6 +15,7 @@ const ftpConfig = {
 };
 
 export const mangaUpload = async (req: Request, res: Response) => {
+  
   let ftpConnection: any = null;
   try {
     const { title, author, category, description, trending, rating, tags, chapters } = req.body;
@@ -69,7 +70,7 @@ export const mangaUpload = async (req: Request, res: Response) => {
     manga.chapters = chapterObjects;
     await manga.save();
 
-    res.status(201).json({ message: 'Manga uploaded successfully' });
+    res.status(200).json({ message: 'Manga uploaded successfully' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });
@@ -160,24 +161,25 @@ export const mangaGet = async (req: Request, res: Response) => {
 
 
 export const getAllManga = async (req: Request, res: Response) => {
-  // const page = parseInt(req.query.page as string) || 1;
-  // const perPage = 10; 
+  const page = parseInt(req.query.page as string) || 1;
+  console.log("i am running")
+  const perPage = 15; 
   try {
 
-    // const offset = (page - 1) * perPage;
-    // const allManga = await Manga.findAndCountAll({
-    //   limit: perPage,
-    //   offset: offset,});
+    const offset = (page - 1) * perPage;
+    const allManga = await Manga.findAndCountAll({
+      limit: perPage,
+      offset: offset,});
 
-    const allManga = await Manga.findAll();
+    // const allManga = await Manga.findAll();
 
       
-    // const totalPages = Math.ceil(allManga.count / perPage);
-    // res.status(200).json({  manga: allManga.rows,
-    //   currentPage: page,
-    //   totalPages: totalPages,});
+    const totalPages = Math.ceil(allManga.count / perPage);
+    res.status(200).json({  manga: allManga.rows,
+      currentPage: page,
+      totalPages: totalPages,});
 
-    res.status(200).json(allManga)
+    // res.status(200).json(allManga)
   } catch (error) {
     console.error('Error fetching manga:', error);
     res.status(500).json({ error: 'Internal server error' });
